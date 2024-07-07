@@ -3,9 +3,9 @@
 
 from fastapi.testclient import TestClient
 
-import main
+import app
 
-client = TestClient(main.app)
+client = TestClient(app.app)
 
 
 def test_first_read_health():
@@ -14,9 +14,9 @@ def test_first_read_health():
     assert response.json() == {
         "IA": {
             "model_name": "LMW",
-            "build_date": main.IA.build_date,
+            "build_date": app.IA.build_date,
             "data_source": "data_sepsis 4.csv",
-            "time_to_build": main.IA.time_to_build,
+            "time_to_build": app.IA.time_to_build,
             "version": 0.1,
         },
         "prediction": {"total_positive": 0, "total_negative": 0, "total": 0},
@@ -40,8 +40,8 @@ def test_post_positive_patient_test():
 
     assert response.status_code == 200
     assert response.text == '"Positive"'
-    assert main.total_patient_positive == 1
-    assert main.total_patient_negative == 0
+    assert app.total_patient_positive == 1
+    assert app.total_patient_negative == 0
 
 
 def test_read_post_positive_health():
@@ -50,15 +50,15 @@ def test_read_post_positive_health():
     assert response.json() == {
         "IA": {
             "model_name": "LMW",
-            "build_date": main.IA.build_date,
+            "build_date": app.IA.build_date,
             "data_source": "data_sepsis 4.csv",
-            "time_to_build": main.IA.time_to_build,
+            "time_to_build": app.IA.time_to_build,
             "version": 0.1,
         },
         "API": {
             "average_preditction_response_time": round(
-                round(main.time_to_predict.total_seconds() * 1000, 2)
-                / (main.total_patient_negative + main.total_patient_positive),
+                round(app.time_to_predict.total_seconds() * 1000, 2)
+                / (app.total_patient_negative + app.total_patient_positive),
                 2,
             )
         },
@@ -96,8 +96,8 @@ def test_post_noborn_patient_test():
             }
         ]
     }
-    assert main.total_patient_positive == 1
-    assert main.total_patient_negative == 0
+    assert app.total_patient_positive == 1
+    assert app.total_patient_negative == 0
 
 
 def test_read_post_noborn_patient_health():
@@ -106,15 +106,15 @@ def test_read_post_noborn_patient_health():
     assert response.json() == {
         "IA": {
             "model_name": "LMW",
-            "build_date": main.IA.build_date,
+            "build_date": app.IA.build_date,
             "data_source": "data_sepsis 4.csv",
-            "time_to_build": main.IA.time_to_build,
+            "time_to_build": app.IA.time_to_build,
             "version": 0.1,
         },
         "API": {
             "average_preditction_response_time": round(
-                round(main.time_to_predict.total_seconds() * 1000, 2)
-                / (main.total_patient_negative + main.total_patient_positive),
+                round(app.time_to_predict.total_seconds() * 1000, 2)
+                / (app.total_patient_negative + app.total_patient_positive),
                 2,
             )
         },
@@ -139,8 +139,8 @@ def test_post_negative_patient_test():
 
     assert response.status_code == 200
     assert response.text == '"Negative"'
-    assert main.total_patient_positive == 1
-    assert main.total_patient_negative == 1
+    assert app.total_patient_positive == 1
+    assert app.total_patient_negative == 1
 
 
 def test_read_final_health():
@@ -149,15 +149,15 @@ def test_read_final_health():
     assert response.json() == {
         "IA": {
             "model_name": "LMW",
-            "build_date": main.IA.build_date,
+            "build_date": app.IA.build_date,
             "data_source": "data_sepsis 4.csv",
-            "time_to_build": main.IA.time_to_build,
+            "time_to_build": app.IA.time_to_build,
             "version": 0.1,
         },
         "API": {
             "average_preditction_response_time": round(
-                round(main.time_to_predict.total_seconds() * 1000, 2)
-                / (main.total_patient_negative + main.total_patient_positive),
+                round(app.time_to_predict.total_seconds() * 1000, 2)
+                / (app.total_patient_negative + app.total_patient_positive),
                 2,
             )
         },
