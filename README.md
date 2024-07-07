@@ -48,5 +48,5 @@ pip install -r requirements.txt
 
 5 - Lancement du code : 
 ```shell
-fastapi dev main.py
+fastapi dev app.py
 ```
