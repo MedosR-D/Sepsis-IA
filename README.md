@@ -19,7 +19,7 @@ Elie Yvon BOTOUKOU ONGOUYA | Responsable produit
 ## Utilisation du serveur de production
 L'API est disponible en ligne sur 
 
-Elle est hébergé par un EC2 sur AWS - PARIS.
+Elle est hébergé par un EC2 sur AWS - Paris (EU-WEST-3).
 
 ## Fonctionnement local
 Requiert [Python 3.12](https://www.python.org/ftp/python/3.12.4/)
